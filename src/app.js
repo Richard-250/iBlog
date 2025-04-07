@@ -4,7 +4,7 @@ import passport from "passport";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import { mongoManager } from "./config/dbConfig.js";
-// import seedStudents from "./seeders/student.seeder.js";
+import seedCategories from "./seeders/categories.js";
 import allRouters from "./routes/index.js"
 import http from 'http';
 import { initializeSocketServer } from "./service/notificationService.js";
@@ -20,7 +20,7 @@ app.use(cors());
 (async () => {
   try {
     await mongoManager.connect();
-    // seedStudents()
+    seedCategories()
     console.log('MongoDB connection successful!');
   } catch (error) {
     console.error('Error:', error);

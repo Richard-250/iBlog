@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
   const sendEmail = async (options) => {
     try {
       const mailOptions = {
-        from: `Education Portal <${process.env.EMAIL_FROM}>`,
+        from: `iBlog Team <${process.env.EMAIL_FROM}>`,
         to: options.email,
         subject: options.subject,
         html: options.html
@@ -35,7 +35,7 @@ const transporter = nodemailer.createTransport({
 export const sendVerificationEmail = async (options) => {
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 5px; background-color: #f9f9f9;">
-        <h2 style="color: #333; text-align: center; margin-bottom: 20px;">Welcome to Education Portal!</h2>
+        <h2 style="color: #333; text-align: center; margin-bottom: 20px;">Welcome to iBlog Team!</h2>
         <p style="color: #555; font-size: 16px; line-height: 1.5;">Hello ${options.firstName},</p>
         <p style="color: #555; font-size: 16px; line-height: 1.5;">Thank you for registering on our platform. To complete your registration, please verify your email address by clicking the button below:</p>
         <div style="text-align: center; margin: 30px 0;">
@@ -112,7 +112,7 @@ export const sendWelcomeEmail = async (options) => {
       <p style="color: #555; font-size: 16px; line-height: 1.5;">Thank you for completing your registration. We're excited to have you on board!</p>
       <p style="color: #555; font-size: 16px; line-height: 1.5;">With iBlog Team, you can:</p>
       <ul style="color: #555; font-size: 16px; line-height: 1.5;">
-        <li>Access quality educational content</li>
+        <li>Access quality Social media content</li>
         <li>Track your learning progress</li>
         <li>Connect with teachers and peers</li>
         <li>Receive personalized learning recommendations</li>
@@ -127,7 +127,7 @@ export const sendWelcomeEmail = async (options) => {
 
   return await sendEmail({
     email: options.email,
-    subject: options.subject || 'Welcome to Education Portal!',
+    subject: options.subject || 'Welcome to iBlog Team!',
     html
   });
 };

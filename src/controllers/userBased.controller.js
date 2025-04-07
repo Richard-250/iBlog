@@ -216,9 +216,27 @@ export const getCurrentUser = async (req, res) => {
 
 export const updateUserProfile = async (req, res) => {
     try {
-        const { firstName, lastName, email, phoneNumber } = req.body;
+        // First check if req.body exists at all
+        if (!req.body && !req.file) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'No data provided for update' 
+            });
+        }
+
+        // Now safely destructure (with default empty object if req.body is undefined)
+        const { firstName, lastName, email, phoneNumber } = req.body || {};
+
+        // Check if all fields are empty and no file was uploaded
+        if (!firstName && !lastName && !email && !phoneNumber && !req.file) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'No data provided for update' 
+            });
+        }
+        
         const user = await User.findById(req.user.id);
-  
+
         if (!user) {
             return res.status(404).json({ 
                 success: false, 
@@ -296,7 +314,7 @@ export const updateUserProfile = async (req, res) => {
 export const getAllUsers = async (req, res) => {
     try {
         // Check if the requesting user is a teacher
-        if (req.user.role !== 'teacher') {
+        if (req.user.role !== 'admin') {
             return res.status(403).json({
                 success: false,
                 message: 'Access denied. Admin privileges required.'
@@ -362,7 +380,7 @@ export const getAllUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
     try {
         // Check if the requesting user is an admin
-        if (req.user.role !== 'teacher') {
+        if (req.user.role !== 'admin') {
             return res.status(403).json({
                 success: false,
                 message: 'Access denied. Admin privileges required.'
@@ -395,7 +413,7 @@ export const getUserById = async (req, res) => {
 export const adminUpdateUser = async (req, res) => {
     try {
         // Check if the requesting user is an admin
-        if (req.user.role !== 'teacher') {
+        if (req.user.role !== 'admin') {
             return res.status(403).json({
                 success: false,
                 message: 'Access denied. Admin privileges required.'
@@ -461,7 +479,7 @@ export const adminUpdateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     try {
         // Check if the requesting user is an admin
-        if (req.user.role !== 'teacher') {
+        if (req.user.role !== 'admin') {
             return res.status(403).json({
                 success: false,
                 message: 'Access denied. Admin privileges required.'

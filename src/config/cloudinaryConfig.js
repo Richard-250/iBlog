@@ -21,9 +21,9 @@ const FILE_TYPES = {
 
 const determineFileCategory = (mimetype, originalname) => {
   const ext = path.extname(originalname).toLowerCase().slice(1);
-  if (mimetype.startsWith('image/') || FILE_TYPES.IMAGE.includes(ext)) return 'images';
-  if (mimetype.startsWith('video/') || FILE_TYPES.VIDEO.includes(ext)) return 'videos';
-  if (mimetype.startsWith('audio/') || FILE_TYPES.AUDIO.includes(ext)) return 'audio';
+  if (mimetype.startsWith('image/') || FILE_TYPES.IMAGE.includes(ext)) return 'image';
+  if (mimetype.startsWith('video/') || FILE_TYPES.VIDEO.includes(ext)) return 'video';
+  if (mimetype.startsWith('audio/') || FILE_TYPES.AUDIO.includes(ext)) return 'video';
   if (FILE_TYPES.DOCUMENT.includes(ext)) return 'documents';
   return 'other';
 };

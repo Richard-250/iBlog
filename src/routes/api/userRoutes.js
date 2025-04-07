@@ -33,11 +33,11 @@ router.patch('/api/auth/profile', authenticate, CloudinaryConfig.upload.single('
 
 // Admin only routes
 router.use(authenticate)
-router.get('/api/auth/get-all-user', restrictTo('teacher'), getAllUsers);
+router.get('/api/auth/get-all-user', restrictTo('admin'), getAllUsers);
 router.route('/user/:id')
-  .get(restrictTo('teacher'), getUserById)
-  .put(restrictTo('teacher'), adminUpdateUser)
-  .delete(restrictTo('teacher'), deleteUser);
+  .get(restrictTo('admin'), getUserById)
+  .put(restrictTo('admin'), adminUpdateUser)
+  .delete(restrictTo('admin'), deleteUser);
 
 
 export default router;

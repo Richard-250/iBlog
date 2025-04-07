@@ -41,7 +41,7 @@ export const registerUser = async (req, res) => {
     try {
       await sendVerificationEmail({
         email: user.email,
-        subject: "Education Portal - Verify Your Email",
+        subject: "iBlog Team - Verify Your Email",
         firstName: user.firstName,
         verificationUrl,
       });
@@ -69,7 +69,6 @@ export const registerUser = async (req, res) => {
     });
   }
 };
-
 
 export const verifyEmail = async (req, res) => {
   try {
@@ -156,7 +155,7 @@ export const resendVerificationEmail = async (req, res) => {
     const verificationUrl = `${req.protocol}://${req.get('host')}/api/auth/verify-email/${token}`;
     await sendVerificationEmail({
       email: user.email,
-      subject: "Education Portal - Verify Your Email",
+      subject: "iBlog Team - Verify Your Email",
       firstName: user.firstName,
       verificationUrl,
     });
@@ -221,7 +220,7 @@ export const loginUser = async (req, res) => {
       // Send 2FA code via email
       await sendTwoFactorEmail({
         email: user.email,
-        subject: 'Education Portal - Your 2FA Code',
+        subject: 'iBlog Team - Your 2FA Code',
         firstName: user.firstName,
         code: twoFactorCode
       });
@@ -275,7 +274,7 @@ export const loginUser = async (req, res) => {
 
     await sendWelcomeEmail({
       email: user.email,
-      subject: "Education Portal - WELCOME",
+      subject: "iBlog Team - WELCOME",
       firstName: user.firstName,
       loginUrl,
     })
